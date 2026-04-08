@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Northstar Risk Desk</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="backdrop backdrop-a"></div>
+    <div class="backdrop backdrop-b"></div>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <div class="brand-mark">N</div>
+          <div>
+            <div class="eyebrow">Internal Fintech Intelligence</div>
+            <h1>Northstar Risk Desk</h1>
+          </div>
+        </div>
+        <div class="topbar-note">Grounded answers across treasury, underwriting, fraud, compliance, and payment ops.</div>
+      </header>
+
+      <section class="hero-grid">
+        <article class="hero-card hero-card-primary">
+          <div class="hero-kicker">Purpose</div>
+          <p class="hero-copy">
+            Northstar turns internal policy notes, incident reviews, committee briefs, and operating memos into
+            analyst-ready answers with citations and confidence controls.
+          </p>
+          <div class="hero-tags">
+            <span class="pill">Hybrid retrieval</span>
+            <span class="pill">Grounded answers</span>
+            <span class="pill">Abstention on weak support</span>
+          </div>
+        </article>
+
+        <article class="hero-card">
+          <div class="hero-kicker">Primary workflows</div>
+          <ul class="simple-list">
+            <li>Explain why a control tripped and what changed operationally.</li>
+            <li>Brief treasury, risk, or compliance leads from internal source material.</li>
+            <li>Compare policy responses before making a manual escalation decision.</li>
+          </ul>
+        </article>
+
+        <article class="hero-card stat-cluster">
+          <div class="mini-stat">
+            <span class="mini-label">Index built</span>
+            <strong id="status-built-at">Loading</strong>
+          </div>
+          <div class="mini-stat">
+            <span class="mini-label">Documents</span>
+            <strong id="status-documents">0</strong>
+          </div>
+          <div class="mini-stat">
+            <span class="mini-label">Chunks</span>
+            <strong id="status-chunks">0</strong>
+          </div>
+        </article>
+      </section>
+
+      <section class="workspace-grid">
+        <article class="panel composer-panel">
+          <div class="panel-header">
+            <span>Ask Northstar</span>
+            <button id="rebuild-button" class="ghost-button">Rebuild Index</button>
+          </div>
+
+          <form id="ask-form">
+            <textarea
+              id="query-input"
+              rows="5"
+              placeholder="Example: Why does treasury monitor warehouse utilization and settlement lag together?"
+            ></textarea>
+            <div class="form-actions">
+              <button type="submit" class="primary-button">Run Brief</button>
+              <button type="button" id="eval-button" class="secondary-button">Run Retrieval Health Check</button>
+            </div>
+          </form>
+
+          <div class="subsection-label">Suggested briefs</div>
+          <div class="chip-row" id="prompt-chips"></div>
+        </article>
+
+        <article class="panel answer-panel">
+          <div class="panel-header">
+            <span>Decision Brief</span>
+            <span class="badge" id="confidence-badge">Confidence: --</span>
+          </div>
+
+          <div class="query-meta" id="query-meta">Waiting for a question.</div>
+          <div id="answer-body" class="answer-body">
+            Northstar will summarize the relevant control logic, show the supporting evidence, and surface warnings
+            when support is weak.
+          </div>
+          <div id="warning-list" class="warning-list"></div>
+        </article>
+      </section>
+
+      <section class="workspace-grid lower-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <span>Supporting Evidence</span>
+            <span class="badge">Cited source chunks</span>
+          </div>
+          <div id="evidence-list" class="stack"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <span>Retrieval Plan</span>
+            <span class="badge">Planner + fusion trace</span>
+          </div>
+          <div id="trace-body" class="trace-grid"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <span>Knowledge Rooms</span>
+            <span class="badge">Indexed internal documents</span>
+          </div>
+          <div id="document-list" class="stack"></div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <span>Retrieval Health</span>
+          <span class="badge">Recall / MRR / nDCG / support</span>
+        </div>
+        <div id="evaluation-body" class="evaluation-body">
+          Run the retrieval health check to benchmark the current pipeline on the included fintech query set.
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/assets/app.js"></script>
+  </body>
+  </html>
