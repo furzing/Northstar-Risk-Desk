@@ -3,45 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Northstar Risk Desk</title>
+    <title>FlowScore AI</title>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>
+    <div class="grain"></div>
     <div class="backdrop backdrop-a"></div>
     <div class="backdrop backdrop-b"></div>
 
     <main class="app-shell">
       <header class="topbar">
         <div class="brand-lockup">
-          <div class="brand-mark">N</div>
+          <div class="brand-mark">F</div>
           <div>
-            <div class="eyebrow">Internal Fintech Intelligence</div>
-            <h1>Northstar Risk Desk</h1>
+            <div class="eyebrow">Cash-Flow Credit Intelligence</div>
+            <h1>FlowScore AI</h1>
           </div>
         </div>
-        <div class="topbar-note">Grounded answers across treasury, underwriting, fraud, compliance, and payment ops.</div>
+        <p class="topbar-note">
+          Grounded underwriting for SMB credit lines and invoice advances. The memo is evidence-linked, structure-aware,
+          and built for analyst review rather than blind automation.
+        </p>
       </header>
 
       <section class="hero-grid">
         <article class="hero-card hero-card-primary">
-          <div class="hero-kicker">Purpose</div>
+          <div class="hero-kicker">Decision engine</div>
           <p class="hero-copy">
-            Northstar turns internal policy notes, incident reviews, committee briefs, and operating memos into
-            analyst-ready answers with citations and confidence controls.
+            Blend cash-flow analytics, receivables quality, and policy retrieval into one underwriting workflow. Select
+            a borrower, run the analysis, and inspect the supporting thresholds behind the recommendation.
           </p>
           <div class="hero-tags">
-            <span class="pill">Hybrid retrieval</span>
-            <span class="pill">Grounded answers</span>
-            <span class="pill">Abstention on weak support</span>
+            <span class="pill">LLM retrieval</span>
+            <span class="pill">Cash runway</span>
+            <span class="pill">Reserve logic</span>
+            <span class="pill">Cited policy evidence</span>
           </div>
         </article>
 
         <article class="hero-card">
-          <div class="hero-kicker">Primary workflows</div>
+          <div class="hero-kicker">What it does</div>
           <ul class="simple-list">
-            <li>Explain why a control tripped and what changed operationally.</li>
-            <li>Brief treasury, risk, or compliance leads from internal source material.</li>
-            <li>Compare policy responses before making a manual escalation decision.</li>
+            <li>Scores repayment capacity from transaction and invoice behavior.</li>
+            <li>Recommends limit size, reserve structure, and monitoring triggers.</li>
+            <li>Answers follow-up credit questions against the internal policy corpus.</li>
           </ul>
         </article>
 
@@ -61,81 +66,153 @@
         </article>
       </section>
 
-      <section class="workspace-grid">
-        <article class="panel composer-panel">
+      <section class="board-grid">
+        <aside class="panel selector-panel">
           <div class="panel-header">
-            <span>Ask Northstar</span>
+            <span>Borrower set</span>
+            <span class="badge">Synthetic applicants</span>
+          </div>
+          <div id="applicant-list" class="applicant-list"></div>
+
+          <div class="subsection-label">Workflow</div>
+          <ul class="simple-list compact-list">
+            <li>Choose a borrower profile.</li>
+            <li>Run the underwriting decision and inspect structure.</li>
+            <li>Ask follow-up questions against the policy library.</li>
+          </ul>
+
+          <div class="form-actions">
+            <button id="analyze-button" class="primary-button">Run Underwriting</button>
             <button id="rebuild-button" class="ghost-button">Rebuild Index</button>
           </div>
+        </aside>
 
-          <form id="ask-form">
-            <textarea
-              id="query-input"
-              rows="5"
-              placeholder="Example: Why does treasury monitor warehouse utilization and settlement lag together?"
-            ></textarea>
-            <div class="form-actions">
-              <button type="submit" class="primary-button">Run Brief</button>
-              <button type="button" id="eval-button" class="secondary-button">Run Retrieval Health Check</button>
+        <section class="workspace">
+          <article class="panel memo-panel">
+            <div class="panel-header">
+              <span>Credit Memo</span>
+              <div class="inline-meta">
+                <span id="decision-badge" class="badge">Awaiting analysis</span>
+                <span id="confidence-badge" class="badge badge-soft">Confidence --</span>
+              </div>
             </div>
-          </form>
 
-          <div class="subsection-label">Suggested briefs</div>
-          <div class="chip-row" id="prompt-chips"></div>
+            <h2 id="underwriting-headline" class="memo-headline">Select a borrower to generate the memo.</h2>
+            <div id="policy-query" class="policy-query">Policy retrieval terms will appear here.</div>
+            <div id="memo-sections" class="memo-sections"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <span>Key Metrics</span>
+              <span class="badge">Decision inputs</span>
+            </div>
+            <div id="metrics-grid" class="metrics-grid"></div>
+          </article>
+
+          <article class="panel ask-panel">
+            <div class="panel-header">
+              <span>Analyst Follow-Up</span>
+              <span class="badge badge-soft">Grounded Q&amp;A</span>
+            </div>
+
+            <form id="ask-form">
+              <textarea
+                id="query-input"
+                rows="4"
+                placeholder="Example: Why does this file need a reserve instead of a clean approval?"
+              ></textarea>
+              <div class="form-actions">
+                <button type="submit" class="primary-button">Ask Policy Layer</button>
+                <button type="button" id="eval-button" class="secondary-button">Run Retrieval Health Check</button>
+              </div>
+            </form>
+
+            <div class="subsection-label">Suggested prompts</div>
+            <div id="prompt-chips" class="chip-row"></div>
+
+            <div id="query-meta" class="query-meta">Waiting for an underwriting question.</div>
+            <div id="answer-body" class="answer-body">
+              The answer pane uses the selected borrower context plus the policy corpus to explain the current decision.
+            </div>
+            <div id="warning-list" class="warning-list"></div>
+          </article>
+        </section>
+      </section>
+
+      <section class="detail-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <span>Strengths</span>
+            <span class="badge badge-soft">Positive signals</span>
+          </div>
+          <div id="strengths-list" class="stack"></div>
         </article>
 
-        <article class="panel answer-panel">
+        <article class="panel">
           <div class="panel-header">
-            <span>Decision Brief</span>
-            <span class="badge" id="confidence-badge">Confidence: --</span>
+            <span>Risk Flags</span>
+            <span class="badge">Watchlist inputs</span>
           </div>
+          <div id="flags-list" class="stack"></div>
+        </article>
 
-          <div class="query-meta" id="query-meta">Waiting for a question.</div>
-          <div id="answer-body" class="answer-body">
-            Northstar will summarize the relevant control logic, show the supporting evidence, and surface warnings
-            when support is weak.
+        <article class="panel">
+          <div class="panel-header">
+            <span>Cash Trend</span>
+            <span class="badge badge-soft">Monthly inflow, outflow, balance</span>
           </div>
-          <div id="warning-list" class="warning-list"></div>
+          <div id="trend-body" class="trend-grid"></div>
         </article>
       </section>
 
-      <section class="workspace-grid lower-grid">
+      <section class="detail-grid detail-grid-lower">
         <article class="panel">
           <div class="panel-header">
-            <span>Supporting Evidence</span>
-            <span class="badge">Cited source chunks</span>
+            <span>Transaction Highlights</span>
+            <span class="badge badge-soft">Notable movements</span>
+          </div>
+          <div id="transaction-body" class="stack"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <span>Policy Evidence</span>
+            <span class="badge">Current source chunks</span>
           </div>
           <div id="evidence-list" class="stack"></div>
         </article>
 
         <article class="panel">
           <div class="panel-header">
-            <span>Retrieval Plan</span>
-            <span class="badge">Planner + fusion trace</span>
+            <span>Retrieval Trace</span>
+            <span class="badge badge-soft">Planner and fusion view</span>
           </div>
           <div id="trace-body" class="trace-grid"></div>
         </article>
+      </section>
 
+      <section class="detail-grid detail-grid-lower">
         <article class="panel">
           <div class="panel-header">
-            <span>Knowledge Rooms</span>
-            <span class="badge">Indexed internal documents</span>
+            <span>Policy Library</span>
+            <span class="badge badge-soft">Indexed documents</span>
           </div>
           <div id="document-list" class="stack"></div>
         </article>
-      </section>
 
-      <section class="panel">
-        <div class="panel-header">
-          <span>Retrieval Health</span>
-          <span class="badge">Recall / MRR / nDCG / support</span>
-        </div>
-        <div id="evaluation-body" class="evaluation-body">
-          Run the retrieval health check to benchmark the current pipeline on the included fintech query set.
-        </div>
+        <article class="panel panel-wide">
+          <div class="panel-header">
+            <span>Retrieval Health</span>
+            <span class="badge">Recall, MRR, nDCG, support</span>
+          </div>
+          <div id="evaluation-body" class="evaluation-body">
+            Run the retrieval health check to benchmark the underwriting corpus against the included evaluation set.
+          </div>
+        </article>
       </section>
     </main>
 
     <script type="module" src="/assets/app.js"></script>
   </body>
-  </html>
+</html>

@@ -1,21 +1,40 @@
-# Merchant Underwriting and Reserve Policy
+# Merchant Underwriting Reserve Policy
 
-## Approval posture
+## Core approval criteria
 
-Merchant underwriting optimizes for controlled volume growth rather than maximum approval rate. The team prefers a lower initial limit with a path to scale once repayment behavior, refund latency, and dispute quality are observable. This is especially important in verticals where early volume can mask unstable unit economics or aggressive promotional behavior.
+Cash flow files can be approved without structural enhancement when all of the following are true:
 
-## Rolling reserve increase triggers
+- Proxy DSCR is at or above 1.35x.
+- Liquidity covers at least 3 months of fixed operating costs.
+- Top customer concentration stays at or below 35% of recent invoice volume.
+- Overdue receivables stay below 10% of the receivables book.
+- No more than one minor statement exception appears in the trailing 90 days.
 
-A rolling reserve increase is triggered when chargeback ratio exceeds 0.9%, refund lag exceeds 12 days, or buyer concentration from a single cohort exceeds 18% of weekly volume. The reserve can also increase when the merchant begins same-day fulfillment claims without proving stable shipment confirmation quality. These rules are intentionally mechanical because reserve discipline tends to degrade when exceptions are handled ad hoc.
+## Reserve triggers
 
-## Manual review factors
+A reserve recommendation of 5% to 10% is appropriate in merchant underwriting when the business still covers debt service but one or more structural concerns are present:
 
-Manual underwriting review is required for merchants with thin operating history, sudden ticket-size inflation, unexplained cross-border volume, or evidence that affiliate traffic is driving low-intent demand. The review looks for margin fragility, customer acquisition concentration, and signs that fulfillment promises are outrunning cash conversion.
+- Top customer concentration rises above 35%.
+- One NSF or returned ACH fee appears in the last 90 days.
+- Chargebacks or dispute losses rise above 0.6% of gross sales.
+- The minimum observed cash balance falls below one month of fixed costs.
+- Revenue remains solid but invoice aging drifts into the 10% to 15% overdue band.
 
-## Reserve release policy
+## Manual review triggers
 
-Reserve releases are staged rather than immediate. A merchant must show stable fulfillment, sub-threshold dispute performance, and predictable refund timing before treasury releases trapped cash. The release policy is designed to avoid the common error of treating temporary volume growth as proof that future loss exposure has disappeared.
+Move the file to manual review when the company may still be financeable, but a policy override or tighter monitoring is required:
 
-## Monitoring implications
+- DSCR falls between 1.00x and 1.20x.
+- Two or more negative balance days appear in the trailing 90 days.
+- Revenue declines more than 15% month over month without a signed pipeline explanation.
+- Overdue receivables rise into the 15% to 20% band.
 
-Underwriting, treasury, and payment operations all touch the reserve decision from different angles. A reserve policy only works if the evidence from disputes, refunds, and settlement timing flows into one view. Otherwise the company reacts late and ends up using reserves as a blunt recovery tool rather than a forward-looking control.
+## Decline triggers
+
+Decline the request when repayment capacity or control quality breaks below the minimum tolerance:
+
+- DSCR is below 1.00x.
+- Five or more negative balance days appear in the trailing 90 days.
+- Repeated NSF events show weak payment discipline.
+- Chargebacks exceed 1.2% of gross sales.
+- Unresolved payroll or tax delinquencies are visible in statements or diligence.

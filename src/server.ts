@@ -3,6 +3,7 @@ import { answerQuestion } from "./core/answerer";
 import { config } from "./core/config";
 import { runEvaluation } from "./core/evaluator";
 import { buildIndex, loadIndex } from "./core/indexer";
+import { answerUnderwritingQuestion, listApplicantCards, underwriteApplicant } from "./core/underwriting";
 
 const server = Bun.serve({
   port: config.serverPort,
@@ -24,6 +25,12 @@ const server = Bun.serve({
         return Response.json(index.documents);
       }
     },
+    "/api/applicants": {
+      GET: async () => {
+        const applicants = await listApplicantCards();
+        return Response.json(applicants);
+      }
+    },
     "/api/rebuild": {
       POST: async () => {
         const index = await buildIndex();
@@ -37,15 +44,30 @@ const server = Bun.serve({
     },
     "/api/ask": {
       POST: async (request) => {
-        const body = (await request.json()) as { query?: string };
+        const body = (await request.json()) as { applicantId?: string; query?: string };
         const query = body.query?.trim();
 
         if (!query) {
           return Response.json({ error: "Missing query" }, { status: 400 });
         }
 
-        const answer = await answerQuestion(query);
+        const answer = body.applicantId
+          ? await answerUnderwritingQuestion(body.applicantId, query)
+          : await answerQuestion(query);
         return Response.json(answer);
+      }
+    },
+    "/api/underwrite": {
+      POST: async (request) => {
+        const body = (await request.json()) as { applicantId?: string };
+        const applicantId = body.applicantId?.trim();
+
+        if (!applicantId) {
+          return Response.json({ error: "Missing applicantId" }, { status: 400 });
+        }
+
+        const result = await underwriteApplicant(applicantId);
+        return Response.json(result);
       }
     },
     "/api/eval": {
@@ -75,4 +97,4 @@ const server = Bun.serve({
   }
 });
 
-console.log(`Northstar Risk Desk listening on http://localhost:${server.port}`);
+console.log(`FlowScore AI listening on http://localhost:${server.port}`);

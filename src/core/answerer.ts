@@ -144,7 +144,7 @@ function computeHeadingPrior(query: string, heading: string): number {
     /\b(how|why|compare|difference|versus|vs|improve|evaluate|respond|monitor|trigger|escalate|change)\b/.test(
       normalizedQuery
     ) &&
-    /(comparison|benefit|cost|risk|action|metric|evaluation|construction|trigger|threshold|response|monitor|policy change|difference|why|when|watchlist)/.test(
+    /(comparison|benefit|cost|risk|action|metric|evaluation|construction|trigger|threshold|response|monitor|policy change|difference|why|when|watchlist|decision band|approval|manual review|reserve|advance rate|decline)/.test(
       normalizedHeading
     )
   ) {

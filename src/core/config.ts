@@ -6,6 +6,7 @@ export const config = {
   rootDir,
   corpusDir: path.join(rootDir, "data", "corpus"),
   evaluationPath: path.join(rootDir, "data", "evaluation", "queries.json"),
+  applicantsPath: path.join(rootDir, "data", "applicants", "profiles.json"),
   indexPath: path.join(rootDir, "storage", "index", "atlas-index.json"),
   publicDir: path.join(rootDir, "public"),
   serverPort: Number(process.env.PORT ?? 3000),

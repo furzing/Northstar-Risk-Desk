@@ -112,3 +112,145 @@ export interface EvaluationSummary {
   };
   results: EvaluationResult[];
 }
+
+export type RequestedProduct = "working_capital_line" | "invoice_advance";
+
+export type ApplicantTransactionCategory =
+  | "revenue"
+  | "invoice_payment"
+  | "payout"
+  | "payroll"
+  | "rent"
+  | "software"
+  | "contractor"
+  | "inventory"
+  | "freight"
+  | "marketing"
+  | "tax"
+  | "loan_payment"
+  | "processing_fee"
+  | "refund"
+  | "chargeback"
+  | "nsf_fee"
+  | "insurance"
+  | "utilities"
+  | "professional_services"
+  | "owner_draw";
+
+export interface ApplicantTransaction {
+  date: string;
+  description: string;
+  amount: number;
+  category: ApplicantTransactionCategory;
+  counterparty?: string;
+}
+
+export type InvoiceStatus = "paid" | "pending" | "overdue";
+
+export interface ApplicantInvoice {
+  invoiceId: string;
+  customer: string;
+  issueDate: string;
+  dueDate: string;
+  amount: number;
+  status: InvoiceStatus;
+  paidDate?: string;
+}
+
+export interface ApplicantObligation {
+  lender: string;
+  type: string;
+  monthlyPayment: number;
+  outstandingBalance: number;
+}
+
+export interface ApplicantProfile {
+  id: string;
+  businessName: string;
+  industry: string;
+  requestedProduct: RequestedProduct;
+  requestedAmount: number;
+  requestedPurpose: string;
+  foundedYear: number;
+  headquarters: string;
+  openingBalance: number;
+  narrative: string;
+  policyFocus: string[];
+  transactions: ApplicantTransaction[];
+  invoices: ApplicantInvoice[];
+  obligations: ApplicantObligation[];
+}
+
+export interface ApplicantCard {
+  id: string;
+  businessName: string;
+  industry: string;
+  requestedProduct: RequestedProduct;
+  requestedAmount: number;
+  headline: string;
+  quickLook: string[];
+}
+
+export type InsightSeverity = "positive" | "watch" | "critical";
+
+export interface RiskInsight {
+  label: string;
+  severity: InsightSeverity;
+  detail: string;
+}
+
+export interface UnderwritingMetric {
+  key: string;
+  label: string;
+  displayValue: string;
+  numericValue: number;
+  tone: InsightSeverity | "neutral";
+  note: string;
+}
+
+export interface MemoSection {
+  title: string;
+  bullets: string[];
+}
+
+export interface MonthlyCashPoint {
+  month: string;
+  inflow: number;
+  outflow: number;
+  net: number;
+  endBalance: number;
+}
+
+export type UnderwritingVerdict = "Approve" | "Approve with reserve" | "Manual review" | "Decline";
+
+export interface UnderwritingDecision {
+  verdict: UnderwritingVerdict;
+  riskScore: number;
+  confidence: number;
+  suggestedLimit: number;
+  reservePercentage: number;
+  rationale: string;
+}
+
+export interface TransactionHighlight {
+  date: string;
+  title: string;
+  detail: string;
+  amount: number;
+  tone: "credit" | "debit" | "alert";
+}
+
+export interface UnderwritingResult {
+  applicant: ApplicantProfile;
+  headline: string;
+  policyQuery: string;
+  decision: UnderwritingDecision;
+  metrics: UnderwritingMetric[];
+  strengths: RiskInsight[];
+  flags: RiskInsight[];
+  memoSections: MemoSection[];
+  monthlySeries: MonthlyCashPoint[];
+  transactionHighlights: TransactionHighlight[];
+  evidence: Evidence[];
+  retrievalTrace: RetrievalTrace;
+}

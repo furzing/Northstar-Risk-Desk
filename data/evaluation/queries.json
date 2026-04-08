@@ -1,38 +1,32 @@
 [
   {
-    "id": "q1",
-    "query": "What conditions trigger a rolling reserve increase for a merchant?",
-    "relevantDocumentIds": ["merchant-underwriting"],
-    "expectedPhrases": ["rolling reserve", "chargeback ratio", "refund lag"]
+    "id": "reserve-trigger",
+    "query": "What conditions should trigger a reserve recommendation in merchant underwriting?",
+    "relevantDocumentIds": ["merchant-underwriting", "risk-committee-brief"],
+    "expectedPhrases": ["reserve", "concentration", "nsf"]
   },
   {
-    "id": "q2",
-    "query": "Why does treasury monitor warehouse utilization and settlement lag together?",
-    "relevantDocumentIds": ["treasury-liquidity"],
-    "expectedPhrases": ["warehouse utilization", "settlement lag", "cash gap"]
+    "id": "statement-deterioration",
+    "query": "When should bank statement deterioration move a file into manual review?",
+    "relevantDocumentIds": ["bank-statement-red-flags", "merchant-underwriting"],
+    "expectedPhrases": ["manual review", "negative balance", "nsf"]
   },
   {
-    "id": "q3",
-    "query": "When does AML review escalate to enhanced due diligence?",
-    "relevantDocumentIds": ["aml-escalation"],
-    "expectedPhrases": ["enhanced due diligence", "beneficial ownership", "high-risk corridors"]
+    "id": "revenue-quality",
+    "query": "How does customer concentration affect cash flow underwriting decisions?",
+    "relevantDocumentIds": ["revenue-quality-framework", "merchant-underwriting"],
+    "expectedPhrases": ["customer concentration", "reserve", "monitoring"]
   },
   {
-    "id": "q4",
-    "query": "How is first-party fraud different from account takeover?",
-    "relevantDocumentIds": ["fraud-loss-playbook"],
-    "expectedPhrases": ["first-party fraud", "account takeover", "authorize"]
+    "id": "invoice-advance",
+    "query": "What makes receivables eligible for an 80 percent invoice advance rate?",
+    "relevantDocumentIds": ["invoice-advance-policy"],
+    "expectedPhrases": ["advance rate", "overdue receivables", "concentration"]
   },
   {
-    "id": "q5",
-    "query": "What changed in BNPL credit policy after 30-plus day delinquency increased?",
-    "relevantDocumentIds": ["bnpl-credit-policy"],
-    "expectedPhrases": ["down payment", "tenor", "income verification"]
-  },
-  {
-    "id": "q6",
-    "query": "How should payment operations respond when same-day funding causes ACH returns to spike?",
-    "relevantDocumentIds": ["payment-ops-incident", "treasury-liquidity"],
-    "expectedPhrases": ["same-day funding", "ACH returns", "funding buffer"]
+    "id": "watchlist",
+    "query": "Which covenant breaches should move a borrower onto the watchlist after funding?",
+    "relevantDocumentIds": ["covenant-monitoring"],
+    "expectedPhrases": ["watchlist", "dscr", "returned payments"]
   }
 ]

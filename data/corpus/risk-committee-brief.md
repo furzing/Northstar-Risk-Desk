@@ -1,17 +1,22 @@
-# Weekly Risk Committee Brief
+# Risk Committee Brief Q1 2026
 
-## Executive summary
+## Service businesses
 
-The current operating posture is stable but narrower than last quarter. Liquidity remains adequate, fraud losses are controlled in the core book, and dispute pressure is manageable, but growth-sensitive controls are now closer to their trigger points. The most important risk is not a single broken metric; it is the possibility that payout speed, reserve policy, and underwriting loosen at the same time.
+The committee remains comfortable approving service businesses with an isolated payment exception when the broader file is clean:
 
-## Watchlist items
+- One NSF event should not force a decline when DSCR remains above 1.30x, revenue is recurring, and customer concentration stays below 40%.
+- In those cases, a modest reserve or weekly cash reporting is usually enough.
 
-The committee watchlist includes warehouse utilization approaching the internal yellow zone, rising ACH returns in a same-day funding cohort, and early delinquency stress in first-time BNPL borrowers. None of these items independently forces a risk-off posture, but the combination argues for tighter operating discipline.
+## Distribution and invoice finance
 
-## Management actions
+For distribution and invoice-backed products, the committee prefers disciplined structure over oversized limits:
 
-Management approved tighter reserve release pacing, targeted BNPL policy tightening, and an AML review of merchants showing unexplained cross-border growth. The committee did not approve a blanket growth freeze because the issues remain concentrated rather than systemic.
+- Keep full requested size only when eligible receivables support it at the target advance rate.
+- Reduce facility size rather than stretching eligibility assumptions.
 
-## Decision standard
+## E-commerce
 
-The committee expects every escalation memo to state the trigger, the control response, and the metric that would justify rolling the control back. This standard exists to keep risk actions reversible and evidence-based rather than emotional.
+The committee is materially more conservative on e-commerce and marketplace-heavy borrowers:
+
+- Rising chargebacks plus thinning liquidity runway should push the file toward manual review or decline.
+- Paid media intensity is not itself a problem, but it becomes one when cash conversion weakens.
